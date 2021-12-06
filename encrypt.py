@@ -1,4 +1,3 @@
-import PIL as pl
 from PIL import Image
 
 
