@@ -1,14 +1,15 @@
 from PIL import Image
 
 
-_TEXT_PATH = "text.txt"
+_TEXT_PATH = "TEXT.txt"
 _IMAGE_PATH = "images\original.png"
+_SAVE_PATH = "images\processed.png"
 
 
 
 #Reeading text file and returning array with bits of
 def readFile(path):
-    fileR = open("text.txt", 'r')
+    fileR = open(path, 'r')
     msg = fileR.read()
     binaArr = []
     for element in msg:  
@@ -39,20 +40,37 @@ bina = readFile(_TEXT_PATH)
 originalImage = Image.open(_IMAGE_PATH)
 processedImage = originalImage.copy()
 
+imgMode = processedImage.mode
+pixelNeeded = int(len(bina)/3)
+pixelAvailable = processedImage.size[0]*originalImage.size[1]
+
+print("Image mode", imgMode)
+print("Pixles Needed = ",pixelNeeded)
+print("Pixles Avilable",pixelAvailable)
+
+
+#Stop the application if the picture is smaller than text
+#   1 CHAR = 4 RGB
+#   3 RGB  = 1 PIXEL
+#   NEW LINE = 2 CHAR = 8 RGB
+if(pixelNeeded>pixelAvailable):
+    print("FAILED TO INCODE: TEXT TOO LARGE FOR THE IMAGE")
+    exit(1)
+
+
 
 i=0
 halt=False
 for x in range(processedImage.size[0]):
     for y in range(processedImage.size[1]):
-        if(i<len(bina)):
-            
+        if(i<len(bina)):  
             _rgb = processedImage.getpixel((x,y))
             _r=int(format(_rgb[0],'08b')[0:6]+bina[i],2)
             _g=int(format(_rgb[1],'08b')[0:6]+bina[i+1],2)
             _b=int(format(_rgb[2],'08b')[0:6]+bina[i+2],2)
             
             processedImage.putpixel((x,y),(_r,_g,_b))
-            print(processedImage.getpixel((x,y)))
+            #print(processedImage.getpixel((x,y)))
             i=i+3
         else:
             halt=True
@@ -60,13 +78,10 @@ for x in range(processedImage.size[0]):
     if(halt):
         break
 
-print("Text size = ",len(bina))
-
-print("Image mode", processedImage.mode)
-print("Image Size",processedImage.size[0],"x",processedImage.size[1],"=",processedImage.size[0]*originalImage.size[1])
 
 
-print("L:",len(bina))
-processedImage.save("images\processed.png",format="png",quality=100)
 
+
+processedImage.save(_SAVE_PATH,format="png",quality=100)
+print("ENCODED :",_SAVE_PATH)
 

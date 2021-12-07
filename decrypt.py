@@ -1,8 +1,9 @@
 from PIL import Image
 
+_IMAGE_PATH = "images\processed.png"
+_OUTPUT_PATH = "DECODED.txt"
 
-
-img = Image.open("images/processed.png")
+img = Image.open(_IMAGE_PATH)
 print("Image mode", img.mode)
 print("Image Size",img.size[0],"x",img.size[1],"=",img.size[0]*img.size[1])
 
@@ -45,14 +46,18 @@ def convert(s):
 
 
 x=0
-while(x<len(bina)):
-    if(int(bina[x]+bina[x+1]+bina[x+2]+bina[x+3],2)>127):
+while(x<=len(bina)):
+    char = int(bina[x]+bina[x+1]+bina[x+2]+bina[x+3],2)
+    if((char<127 and char>30) or char==10):
+
+        #print(char)
+        characters.append(chr(char))
+        x=x+4
+
+    else:
         break
-    #print(bina[x]+bina[x+1]+bina[x+2]+bina[x+3])
-    characters.append(chr(int(bina[x]+bina[x+1]+bina[x+2]+bina[x+3],2)))
-    x=x+4
 
 text = convert(characters)
 print(text)
-with open("decrypted.txt", "w") as f:
+with open(_OUTPUT_PATH, "w") as f:
     f.writelines(str(text))
