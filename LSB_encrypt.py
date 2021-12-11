@@ -1,7 +1,7 @@
 from PIL import Image
 
 
-_TEXT_PATH = "TEXT.txt"
+_TEXT_PATH = "Input.txt"
 _IMAGE_PATH = "images\original.png"
 _SAVE_PATH = "images\processed.png"
 
@@ -15,7 +15,6 @@ def readFile(path):
     for element in msg:  
         binaArr.append(format(ord(element), '08b'))
     splitBinaArray = []
-    #print(binaArr)
     for x in binaArr:
         splitBinaArray.append(x[0:2])
         splitBinaArray.append(x[2:4])
@@ -35,7 +34,6 @@ def readFile(path):
     
 
 bina = readFile(_TEXT_PATH)
-#print(bina)
 
 originalImage = Image.open(_IMAGE_PATH)
 processedImage = originalImage.copy()
@@ -83,5 +81,5 @@ for x in range(processedImage.size[0]):
 
 
 processedImage.save(_SAVE_PATH,format="png",quality=100)
-print("ENCODED :",_SAVE_PATH)
+print("ENCODED IN IMAGE => ",_SAVE_PATH)
 

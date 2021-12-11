@@ -1,7 +1,7 @@
 from PIL import Image
 
 _IMAGE_PATH = "images\processed.png"
-_OUTPUT_PATH = "DECODED.txt"
+_OUTPUT_PATH = "Output.txt"
 
 img = Image.open(_IMAGE_PATH)
 print("Image mode", img.mode)
@@ -61,3 +61,5 @@ text = convert(characters)
 print(text)
 with open(_OUTPUT_PATH, "w") as f:
     f.writelines(str(text))
+
+print("SAVED MESSAGE IN => Output.txt")
