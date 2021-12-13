@@ -7,10 +7,17 @@ _SAVE_PATH = "images\processed.png"
 
 
 
-#Reeading text file and returning array with bits of
+#Handling the message to be encrypted
+#1. Reading the text inside file specified in _TEXT_PATH
+#2. Convert the message into binary ascii splitted by 4
+#   For example 01011101 will be appended to an array as [01,01,11,01]
+#   And that goes for each letter 
+#3. Return the array
 def readFile(path):
+
     fileR = open(path, 'r')
     msg = fileR.read()
+
     binaArr = []
     for element in msg:  
         binaArr.append(format(ord(element), '08b'))
@@ -30,18 +37,19 @@ def readFile(path):
     return splitBinaArray
 
 
-    
-    
-
+#Getting text as binary
 bina = readFile(_TEXT_PATH)
 
+
+
+#Opening the original image to be processed and making a copy of it to save later.
 originalImage = Image.open(_IMAGE_PATH)
 processedImage = originalImage.copy()
 
+#Prining some information
 imgMode = processedImage.mode
 pixelNeeded = int(len(bina)/3)
 pixelAvailable = processedImage.size[0]*originalImage.size[1]
-
 print("Image mode", imgMode)
 print("Pixles Needed = ",pixelNeeded)
 print("Pixles Avilable",pixelAvailable)
@@ -57,6 +65,11 @@ if(pixelNeeded>pixelAvailable):
 
 
 
+#Looping through the pixels and replacing the last 2 bits of each color channel
+#with an element of the binaray array for example Array = [11,10,01,10,01]
+#  (RGB1)=(0000000,00000000,0000000) (RGB2)=(0000000,00000000,0000000)
+#  After proccessing
+#  (RGB1)=(0000011,00000010,0000001) (RGB2)=(0000010,00000001,0000000)
 i=0
 halt=False
 for x in range(processedImage.size[0]):
@@ -79,7 +92,7 @@ for x in range(processedImage.size[0]):
 
 
 
-
+#Saving the processed image with full quality to avoid loss of data.
 processedImage.save(_SAVE_PATH,format="png",quality=100)
 print("ENCODED IN IMAGE => ",_SAVE_PATH)
 
