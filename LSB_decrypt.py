@@ -1,5 +1,8 @@
 from PIL import Image
+import time
 
+
+start_time = time.time()
 _IMAGE_PATH = "images\processed.png"
 _OUTPUT_PATH = "Output.txt"
 
@@ -70,5 +73,6 @@ text = convertToString(characters)
 
 with open(_OUTPUT_PATH, "w") as f:
     f.writelines(str(text))
-    print(text)
+    print("=====MESSAGE=====\n",text,"\n=====END MESSAGE=====")
 print("SAVED MESSAGE IN => Output.txt")
+print("DECODING TOOK %s seconds" % (time.time() - start_time))

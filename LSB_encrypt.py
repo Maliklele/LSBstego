@@ -1,6 +1,8 @@
 from PIL import Image
+import time
 
 
+start_time = time.time()
 _TEXT_PATH = "Input.txt"
 _IMAGE_PATH = "images\original.png"
 _SAVE_PATH = "images\processed.png"
@@ -95,4 +97,6 @@ for x in range(processedImage.size[0]):
 #Saving the processed image with full quality to avoid loss of data.
 processedImage.save(_SAVE_PATH,format="png",quality=100)
 print("ENCODED IN IMAGE => ",_SAVE_PATH)
+print("ENCODED TOOK %s seconds" % (time.time() - start_time))
+
 
