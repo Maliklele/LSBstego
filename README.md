@@ -5,7 +5,7 @@ Least Significant Bit (LSB) Steganography.
 In this technique we will hide text data inside of an image of a fixed size, and to achieve this we will manipulate the least significant bits of the pixels data of an image to our favor using [Python](https://www.python.org/downloads/release/python-3100/)
 
 ## Usage
-###### Dependancies
+###### Dependencies
 - [Pillow](https://pillow.readthedocs.io/en/stable/)
 
 ###### Encoding message inside of an image
