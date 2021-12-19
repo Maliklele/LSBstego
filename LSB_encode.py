@@ -5,7 +5,7 @@ import time
 
 start_time = time.time()
 _TEXT_PATH = "Input.txt"
-_IMAGE_PATH = "images\original_black_test.png"
+_IMAGE_PATH = "images\jeddah.png"
 _SAVE_PATH = "images\processed.png"
 
 
