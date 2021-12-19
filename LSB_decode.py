@@ -32,7 +32,7 @@ for x in range(img.size[0]):
 #Fixing the length of the array to be devidable by four
 #Since ascii is 8 bits and we partitioned it to be 4 parts for each character
 #Example character = 11001101 = [11,00,11,01], inside the array
-for x in range(3):
+for x in range(4):
     if(len(bina)%4!=0):
         bina.append('00')
     else:
@@ -55,7 +55,7 @@ def convertToString(s):
 #We stop the array when we have a character that is out of the range of
 #ascii letters, we add char=10 because that translate to new line
 x=0
-while(x<=len(bina)):
+while(x<len(bina)):
     char = int(bina[x]+bina[x+1]+bina[x+2]+bina[x+3],2)
     if((char<127 and char>30) or char==10):
 

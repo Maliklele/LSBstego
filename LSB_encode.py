@@ -1,10 +1,11 @@
 from PIL import Image
+import math
 import time
 
 
 start_time = time.time()
 _TEXT_PATH = "Input.txt"
-_IMAGE_PATH = "images\original.png"
+_IMAGE_PATH = "images\original_black_test.png"
 _SAVE_PATH = "images\processed.png"
 
 
@@ -62,8 +63,18 @@ print("Pixles Avilable",pixelAvailable)
 #   3 RGB  = 1 PIXEL
 #   NEW LINE = 2 CHAR = 8 RGB
 if(pixelNeeded>pixelAvailable):
-    print("FAILED TO INCODE: TEXT TOO LARGE FOR THE IMAGE")
-    exit(1)
+    x=(pixelNeeded/pixelAvailable)
+    r=math.ceil(math.sqrt(x))
+    new_x =processedImage.size[0]*r
+    new_y =originalImage.size[1]*r
+    
+    print("!!! IMAGE HAS BEEN SCALED UP TO MAINTAIN EXTRA DATA !!!")
+    print("!!! OLD SIZE",processedImage.size[0],"x",originalImage.size[1]," !!!")
+    print("!!! NEW SIZE",new_x,"x",new_y," !!!")
+    processedImage=processedImage.resize((new_x,new_y),Image.ANTIALIAS)
+    
+
+    
 
 
 
