@@ -20,9 +20,10 @@ In this technique we will hide text data inside of an image of a fixed size, and
 
 1. use the [LSB_encode.py](https://github.com/Maliklele/LSBstego/blob/master/LSB_encode.py) file
 2. Make sure to specify the paths for the image, output path, text file which includes the message
-3. Run the application
+3. (Optional: Perfect rat0io will only trigger when the data is bigger than the image, and it wil perserve the ratio, if disablied the application will try to preserve the ratio and use up almost all pixels)
+4. Run the application
 
 ###### Decoding message inside of an image
 
 1. use the [LSB_decode.py](https://github.com/Maliklele/LSBstego/blob/master/LSB_decode.py) file
-2. Make sure to specify the path for the image, and the output text to be save (it will also be previewd in the console)
+2. Make sure to specify the path for the image, and the output text to be save
