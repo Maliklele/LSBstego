@@ -73,6 +73,6 @@ text = convertToString(characters)
 
 with open(_OUTPUT_PATH, "w") as f:
     f.writelines(str(text))
-    print("=====MESSAGE=====\n",text,"\n=====END MESSAGE=====")
+    #print("=====MESSAGE=====\n",text,"\n=====END MESSAGE=====")
 print("SAVED MESSAGE IN => Output.txt")
 print("DECODING TOOK %s seconds" % (time.time() - start_time))

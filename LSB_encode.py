@@ -7,7 +7,7 @@ start_time = time.time()
 _TEXT_PATH = "Input.txt"
 _IMAGE_PATH = "images\jeddah.png"
 _SAVE_PATH = "images\processed.png"
-
+_PERFECT_RATIO = True
 
 
 #Handling the message to be encrypted
@@ -63,14 +63,25 @@ print("Pixles Avilable",pixelAvailable)
 #   3 RGB  = 1 PIXEL
 #   NEW LINE = 2 CHAR = 8 RGB
 if(pixelNeeded>pixelAvailable):
+   
+    new_x =0
+    new_y =0
     x=(pixelNeeded/pixelAvailable)
-    r=math.ceil(math.sqrt(x))
-    new_x =processedImage.size[0]*r
-    new_y =originalImage.size[1]*r
+
+    if(_PERFECT_RATIO):
+        r=math.ceil(math.sqrt(x))
+        new_x =processedImage.size[0]*r
+        new_y =originalImage.size[1]*r
+    else:
+        r=math.sqrt(x)
+        new_x =math.ceil(processedImage.size[0]*r)
+        new_y =math.ceil(originalImage.size[1]*r)
+        
+    
     
     print("!!! IMAGE HAS BEEN SCALED UP TO MAINTAIN EXTRA DATA !!!")
-    print("!!! OLD SIZE",processedImage.size[0],"x",originalImage.size[1]," !!!")
-    print("!!! NEW SIZE",new_x,"x",new_y," !!!")
+    print("!!! OLD SIZE",processedImage.size[0],"x",originalImage.size[1],"=",processedImage.size[0]*processedImage.size[1],"  RATIO : ",processedImage.size[0]/processedImage.size[1]," !!!")
+    print("!!! NEW SIZE",new_x,"x",new_y,"=",new_x*new_y,"   RATIO : ",new_x/new_y," !!!")
     processedImage=processedImage.resize((new_x,new_y),Image.ANTIALIAS)
     
 
